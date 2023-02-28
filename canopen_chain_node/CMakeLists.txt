@@ -23,6 +23,7 @@ find_package(catkin REQUIRED
 find_package(Boost REQUIRED
   COMPONENTS
     filesystem
+    thread
 )
 
 add_service_files(DIRECTORY srv
