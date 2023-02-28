@@ -14,6 +14,11 @@ find_package(catkin REQUIRED
     socketcan_interface
 )
 
+find_package(Boost REQUIRED
+  COMPONENTS
+    thread
+)
+
 catkin_package(
   INCLUDE_DIRS
     include
@@ -25,11 +30,14 @@ catkin_package(
     rosconsole_bridge
     roscpp
     socketcan_interface
+  DEPENDS
+    Boost
 )
 
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
 )
 
 
@@ -64,6 +72,7 @@ add_executable(socketcan_to_topic_node
 target_link_libraries(socketcan_to_topic_node
   socketcan_to_topic
   ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
 )
 
 # topic_to_socketcan_node
@@ -74,6 +83,7 @@ add_executable(topic_to_socketcan_node
 target_link_libraries(topic_to_socketcan_node
   topic_to_socketcan
   ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
 )
 
 # socketcan_bridge_node
@@ -84,6 +94,7 @@ target_link_libraries(${PROJECT_NAME}_node
   topic_to_socketcan
   socketcan_to_topic
   ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
 )
 
 install(
